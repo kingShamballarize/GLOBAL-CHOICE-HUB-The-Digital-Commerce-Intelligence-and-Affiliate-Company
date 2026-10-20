@@ -237,6 +237,7 @@ function renderCompareBar() {
 
     compareBar.dataset.actionsBound = "true";
   }
+}
 
 function renderProducts(items) {
   if (!items.length) {
