@@ -574,10 +574,14 @@ function renderComparison() {
     backButton.addEventListener(
       "click",
       () => {
-        comparisonSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
+        const discoveryDesk = document.getElementById("discovery-desk");
+
+        if (discoveryDesk) {
+          discoveryDesk.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
       }
     );
   }
