@@ -218,26 +218,25 @@ function renderCompareBar() {
     </div>
   `;
 
-  const compareButton =
-    document.getElementById("compare-selected");
+  // Keep actions attached to the stable compare bar rather than
+  // to buttons that are replaced every time the bar is re-rendered.
+  if (!compareBar.dataset.actionsBound) {
+    compareBar.addEventListener("click", event => {
+      const target = event.target;
 
-  const clearButton =
-    document.getElementById("clear-comparison");
+      if (!(target instanceof Element)) {
+        return;
+      }
 
-  if (compareButton) {
-    compareButton.addEventListener(
-      "click",
-      renderComparison
-    );
+      if (target.closest("#clear-comparison")) {
+        clearComparison();
+      } else if (target.closest("#compare-selected")) {
+        renderComparison();
+      }
+    });
+
+    compareBar.dataset.actionsBound = "true";
   }
-
-  if (clearButton) {
-    clearButton.addEventListener(
-      "click",
-      clearComparison
-    );
-  }
-}
 
 function renderProducts(items) {
   if (!items.length) {
