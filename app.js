@@ -412,9 +412,19 @@ function toggleComparison(productId) {
 }
 
 function clearComparison() {
+  // Clear the selection state first, then explicitly reset both
+  // comparison interfaces so no stale panel remains visible.
   selectedForComparison.clear();
 
   removeComparisonView();
+
+  const compareBar =
+    document.getElementById("gch-compare-bar");
+
+  if (compareBar) {
+    compareBar.innerHTML = "";
+    compareBar.hidden = true;
+  }
 
   applyFilters();
 }
