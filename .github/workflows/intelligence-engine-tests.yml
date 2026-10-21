@@ -1,0 +1,26 @@
+name: GCH Intelligence Engine Tests
+
+on:
+  pull_request:
+    paths:
+      - "intelligence-engine/**"
+      - ".github/workflows/intelligence-engine-tests.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "intelligence-engine/**"
+      - ".github/workflows/intelligence-engine-tests.yml"
+
+jobs:
+  test-intelligence-engine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run engine tests
+        run: node --test intelligence-engine/core.test.js
